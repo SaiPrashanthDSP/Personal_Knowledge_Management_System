@@ -1,22 +1,23 @@
-package com.pkms.Services;
+package com.pkms.demo.Services;
 
-import com.pkms.Entity.User;
-import com.pkms.Repository.UserRepository;
+import com.pkms.demo.Entity.User;
+import com.pkms.demo.Entity.UserPrincipal;
+import com.pkms.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByUsername(username)
+        User user = repository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), new ArrayList<>());
+        return new UserPrincipal(user);
     }
 }

@@ -1,4 +1,4 @@
-package com.pkms.Entity;
+package com.pkms.demo.Entity;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;

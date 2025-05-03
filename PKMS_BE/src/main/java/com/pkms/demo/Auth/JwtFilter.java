@@ -1,6 +1,8 @@
-package com.pkms.Auth;
+package com.pkms.demo.Auth;
 
-import com.pkms.Services.CustomUserDetailsService;
+
+import com.pkms.demo.Auth.JwtUtil;
+import com.pkms.demo.Services.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
