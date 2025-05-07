@@ -16,5 +16,10 @@ export class RegisterComponent {
     rePassword: new FormControl(null)
 
   });
+  onSubmit(): void {
+    if (this.registerForm.valid) {
+      console.log('Registration data:', this.registerForm.value);
+    }
+  }
 
 }
