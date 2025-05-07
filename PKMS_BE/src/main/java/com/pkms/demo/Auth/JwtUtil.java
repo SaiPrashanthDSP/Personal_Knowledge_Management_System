@@ -53,10 +53,10 @@ public class JwtUtil {
     public String extractUsername(String token) {
 
         return Jwts.parser()
-                .setSigningKey(getKey())
+                .verifyWith(getKey())
                 .build()
-                .parseClaimsJws(token)
-                .getBody()
+                .parseSignedClaims(token)
+                .getPayload()
                 .getSubject();
     }
 
@@ -66,16 +66,16 @@ public class JwtUtil {
 
     private Date extractExpiration(String token) {
         return Jwts.parser()
-                .setSigningKey(getKey()).build()
-                .parseClaimsJws(token)
-                .getBody()
+                .verifyWith(getKey()).build()
+                .parseSignedClaims(token)
+                .getPayload()
                 .getExpiration();
     }
 
     public boolean validateToken(String token, String username) {
         return (username.equals(extractUsername(token)) && !isTokenExpired(token));
     }
-private Key getKey() {
+private SecretKey getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
       return Keys.hmacShaKeyFor(keyBytes);
 }
